@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: 123456
+    url: jdbc:mysql://192.168.1.93/work?characterEncoding=utf-8&useSSL=false
+  jpa:
+    show-sql: true
+server:
+  servlet:
+    context-path: /work
+#logging:
+#  pattern:
+#    console:  "%d %p - %msg%n"
+#  file: /var/log/tomcat/work.log
+#  level:
+#    #指定的包和目录  : 指定的级别
+#    com.example: debug

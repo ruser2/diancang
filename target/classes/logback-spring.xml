@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+    <!-- 定义控制台输出-->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>
+                    %d %p - %msg%n
+            </pattern>
+        </layout>
+    </appender>
+    <appender name="fileInfo" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--级别过滤 -->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <!--级别-->
+            <level>INFO</level>
+            <!--命中的操作-->
+            <onMatch>ACCEPT</onMatch>
+            <!--不命中的操作-->
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <encoder>
+            <pattern>
+                %d %p - %msg%n
+            </pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 路径-->
+            <fileNamePattern>
+                /var/log/work/info.%d.log
+            </fileNamePattern>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="fileError" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--门槛,达到门槛就命中-->
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>error</level>
+        </filter>
+        <encoder>
+            <pattern>
+                %d %p - %msg%n
+            </pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 路径-->
+            <fileNamePattern>
+                /var/log/work/error.%d.log
+            </fileNamePattern>
+        </rollingPolicy>
+    </appender>
+    <root level="info">
+        <appender-ref ref="console"/>
+        <appender-ref ref="fileInfo"/>
+        <appender-ref ref="fileError"/>
+    </root>
+</configuration>
